@@ -3,8 +3,8 @@ package telecom.uvinfo.sortedcollection;
 
 public class SortedCollection {
 
-	int[] storage, tmp; // tmp utilisé seulement durant mergeSort()
-	int size;
+	private int[] storage, tmp; // tmp utilisé seulement durant mergeSort()
+	private int size;
 
 	public SortedCollection(int storageSize) {
 		storage = new int[storageSize];
@@ -16,6 +16,8 @@ public class SortedCollection {
 		size = values.length;
 	}
 
+	public int size() { return size; }
+
 	public void addElement(int element) {
 		storage[size++] = element;
 	}
@@ -23,11 +25,15 @@ public class SortedCollection {
 	public int getElement(int index) {
 		return storage[index];
 	}
-
+	
 	public void mergeSort() {
 		tmp = new int[storage.length];
 		mergeSort(0, size - 1);
 		tmp = null; // tmp is wasted space, throw it away
+	}
+	
+	public void insertSort() {
+		insertSort(size);
 	}
 
 	public void mergeSort(int fromIndex, int toIndex) {
