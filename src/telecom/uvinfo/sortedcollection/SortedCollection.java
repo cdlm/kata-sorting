@@ -3,7 +3,7 @@ package telecom.uvinfo.sortedcollection;
 
 public class SortedCollection {
 
-	int[] storage, tmp;
+	int[] storage, tmp; // tmp utilisé seulement durant mergeSort()
 	int size;
 
 	public SortedCollection(int storageSize) {
