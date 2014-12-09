@@ -1,4 +1,4 @@
-package telecom.uvinfo.sortedcollection;
+package telecom.uvinfo.sorting;
 
 public class SortingAlgorithmComparison {
 

@@ -1,4 +1,4 @@
-package telecom.uvinfo.sortedcollection;
+package telecom.uvinfo.sorting;
 
 import java.util.Random;
 
