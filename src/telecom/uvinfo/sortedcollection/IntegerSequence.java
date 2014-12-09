@@ -2,18 +2,22 @@ package telecom.uvinfo.sortedcollection;
 
 import java.util.Random;
 
-public class SortedCollection {
+public class IntegerSequence {
 
 	private int[] storage, tmp; // tmp is used only during mergeSort()
 	private int size;
 
-	public SortedCollection(int storageSize) {
-		storage = new int[storageSize];
+	public IntegerSequence(int capacity) {
+		storage = new int[capacity];
 		size = 0;
 	}
 
 	public int size() {
 		return size;
+	}
+
+	public int capacity() {
+		return storage.length;
 	}
 
 	public void addElement(int element) {
@@ -46,7 +50,8 @@ public class SortedCollection {
 	public void shuffle(long seed) {
 		Random random = new Random(seed);
 		for (int index = storage.length - 1; index > 0; index--) {
-			int other = random.nextInt(index + 1); // other takes a value in 0..index
+			int other = random.nextInt(index + 1); // other takes a value in
+													// 0..index
 			this.swap(index, other);
 		}
 	}
@@ -81,6 +86,25 @@ public class SortedCollection {
 		int tmp = storage[other];
 		storage[other] = storage[index];
 		storage[index] = tmp;
+	}
+
+	/**
+	 * Détermine si la séquence est triée.
+	 * 
+	 * @return true si les éléments sont en ordre croissant.
+	 */
+	public boolean isSorted() {
+		if (size == 0)
+			return true;
+
+		int prev = storage[0];
+		for (int x : storage) {
+			if (x < prev)
+				return false;
+			prev = x;
+		}
+
+		return true;
 	}
 
 	public void mergeSort() {
@@ -133,13 +157,13 @@ public class SortedCollection {
 		}
 	}
 
-	public int[] getContent() {
-		int[] result = new int[size];
-		for (int i = 0; i < size; i++)
-			result[i] = storage[i];
+	public IntegerSequence copy() {
+		IntegerSequence result = new IntegerSequence(size);
+		for (int index = 0; index < size; index++)
+			result.addElement(storage[index]);
 		return result;
 	}
-
+	
 	public String toString() {
 		StringBuffer sb = new StringBuffer(2 * size + 1);
 		sb.append("[");
@@ -150,20 +174,6 @@ public class SortedCollection {
 		}
 		sb.append("]");
 		return sb.toString();
-	}
-
-	public boolean isSorted() {
-		if (size == 0)
-			return true;
-
-		int prev = storage[0];
-		for (int x : storage) {
-			if (x < prev)
-				return false;
-			prev = x;
-		}
-
-		return true;
 	}
 
 }

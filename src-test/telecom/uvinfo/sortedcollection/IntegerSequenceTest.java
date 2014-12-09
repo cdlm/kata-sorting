@@ -5,12 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SortedCollectionTest {
-	SortedCollection c;
+public class IntegerSequenceTest {
+	IntegerSequence c;
 
 	@Before
 	public void setUp() {
-		c = new SortedCollection(10);
+		c = new IntegerSequence(10);
 	}
 
 	@Test
@@ -46,7 +46,7 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testMergeSortAlreadySorted() {
-		c = new SortedCollection(1000);
+		c = new IntegerSequence(1000);
 		c.addIncreasingIntegers(1000);
 		assertEquals(1000, c.size());
 		assertTrue(c.isSorted());
@@ -58,7 +58,7 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testMergeSortReversed() {
-		c = new SortedCollection(1000);
+		c = new IntegerSequence(1000);
 		c.addDecreasingIntegers(1000);
 		assertEquals(1000, c.size());
 		assertFalse(c.isSorted()); // unless we are REALLY unlucky
@@ -70,7 +70,7 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testMergeSortShuffled() {
-		c = new SortedCollection(1000);
+		c = new IntegerSequence(1000);
 		c.addIncreasingIntegers(1000);
 		c.shuffle(1234);
 		assertEquals(1000, c.size());
@@ -83,7 +83,7 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testMergeSortRoughShuffled() {
-		c = new SortedCollection(1000);
+		c = new IntegerSequence(1000);
 		c.addIncreasingIntegers(1000);
 		c.localizedShuffle(1234, 100);
 		assertEquals(1000, c.size());
@@ -127,7 +127,7 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testInsertSortAlreadySorted() {
-		c = new SortedCollection(1000);
+		c = new IntegerSequence(1000);
 		c.addIncreasingIntegers(1000);
 		assertEquals(1000, c.size());
 		assertTrue(c.isSorted());
@@ -139,7 +139,7 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testInsertSortReversed() {
-		c = new SortedCollection(1000);
+		c = new IntegerSequence(1000);
 		c.addDecreasingIntegers(1000);
 		assertEquals(1000, c.size());
 		assertFalse(c.isSorted());
@@ -151,7 +151,7 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testInsertSortShuffled() {
-		c = new SortedCollection(1000);
+		c = new IntegerSequence(1000);
 		c.addIncreasingIntegers(1000);
 		c.shuffle(1234);
 		assertEquals(1000, c.size());
@@ -164,7 +164,7 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testInsertSortRoughShuffled() {
-		c = new SortedCollection(1000);
+		c = new IntegerSequence(1000);
 		c.addIncreasingIntegers(1000);
 		c.localizedShuffle(1234, 100);
 		assertEquals(1000, c.size());
