@@ -1,6 +1,5 @@
 package telecom.uvinfo.sortedcollection;
 
-import static telecom.uvinfo.sortedcollection.Utils.*;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -47,7 +46,8 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testMergeSortAlreadySorted() {
-		c = new SortedCollection(inOrderIntegers(1000));
+		c = new SortedCollection(1000);
+		c.addIncreasingIntegers(1000);
 		assertEquals(1000, c.size());
 		assertTrue(c.isSorted());
 
@@ -58,7 +58,8 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testMergeSortReversed() {
-		c = new SortedCollection(reverse(inOrderIntegers(1000)));
+		c = new SortedCollection(1000);
+		c.addDecreasingIntegers(1000);
 		assertEquals(1000, c.size());
 		assertFalse(c.isSorted()); // unless we are REALLY unlucky
 
@@ -69,7 +70,9 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testMergeSortShuffled() {
-		c = new SortedCollection(shuffle(inOrderIntegers(1000)));
+		c = new SortedCollection(1000);
+		c.addIncreasingIntegers(1000);
+		c.shuffle(1234);
 		assertEquals(1000, c.size());
 		assertFalse(c.isSorted());
 
@@ -80,7 +83,9 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testMergeSortRoughShuffled() {
-		c = new SortedCollection(roughShuffle(inOrderIntegers(1000), 20));
+		c = new SortedCollection(1000);
+		c.addIncreasingIntegers(1000);
+		c.localizedShuffle(1234, 100);
 		assertEquals(1000, c.size());
 		assertFalse(c.isSorted());
 
@@ -122,7 +127,8 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testInsertSortAlreadySorted() {
-		c = new SortedCollection(inOrderIntegers(1000));
+		c = new SortedCollection(1000);
+		c.addIncreasingIntegers(1000);
 		assertEquals(1000, c.size());
 		assertTrue(c.isSorted());
 
@@ -133,7 +139,8 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testInsertSortReversed() {
-		c = new SortedCollection(reverse(inOrderIntegers(1000)));
+		c = new SortedCollection(1000);
+		c.addDecreasingIntegers(1000);
 		assertEquals(1000, c.size());
 		assertFalse(c.isSorted());
 
@@ -144,10 +151,12 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testInsertSortShuffled() {
-		c = new SortedCollection(shuffle(inOrderIntegers(1000)));
+		c = new SortedCollection(1000);
+		c.addIncreasingIntegers(1000);
+		c.shuffle(1234);
 		assertEquals(1000, c.size());
 		assertFalse(c.isSorted());
-		
+
 		c.insertSort();
 		assertEquals(1000, c.size());
 		assertTrue(c.isSorted());
@@ -155,10 +164,12 @@ public class SortedCollectionTest {
 
 	@Test
 	public void testInsertSortRoughShuffled() {
-		c = new SortedCollection(roughShuffle(inOrderIntegers(1000), 20));
+		c = new SortedCollection(1000);
+		c.addIncreasingIntegers(1000);
+		c.localizedShuffle(1234, 100);
 		assertEquals(1000, c.size());
 		assertFalse(c.isSorted());
-		
+
 		c.insertSort();
 		assertEquals(1000, c.size());
 		assertTrue(c.isSorted());
