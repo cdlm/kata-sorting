@@ -17,24 +17,12 @@ public class SortingAlgorithmComparison {
 			System.out.printf(",%d", nanos);
 		}
 
-		System.out.printf("\nmergeSort,reversed integers");
+		System.out.printf("\ninsertSort,sorted integers");
 		for (int howMany : dataSizes) {
 			IntegerSequence seq = new IntegerSequence(howMany);
-			seq.addDecreasingIntegers(howMany);
-			long nanos = benchMergeSort(seq, 100);
+			seq.addIncreasingIntegers(howMany);
+			long nanos = benchInsertSort(seq, 100);
 			System.out.printf(",%d", nanos);
-		}
-
-		System.out.printf("\nmergeSort,fully shuffled");
-		for (int howMany : dataSizes) {
-			long nanos = 0;
-			for (int seed = 0; seed < 10; seed++) { // try different (but predictable) seeds
-				IntegerSequence seq = new IntegerSequence(howMany);
-				seq.addIncreasingIntegers(howMany);
-				seq.shuffle(seed);
-				nanos += benchMergeSort(seq, 10);
-			}
-			System.out.printf(",%d", nanos / 10);
 		}
 
 		System.out.printf("\nmergeSort,partly shuffled");
@@ -48,23 +36,31 @@ public class SortingAlgorithmComparison {
 			}
 			System.out.printf(",%d", nanos / 10);
 		}
-
-		System.out.printf("\ninsertSort,sorted integers");
+		
+		System.out.printf("\ninsertSort,partly shuffled");
 		for (int howMany : dataSizes) {
-			IntegerSequence seq = new IntegerSequence(howMany);
-			seq.addIncreasingIntegers(howMany);
-			long nanos = benchInsertSort(seq, 100);
-			System.out.printf(",%d", nanos);
+			long nanos = 0;
+			for (int seed = 0; seed < 10; seed++) {
+				IntegerSequence seq = new IntegerSequence(howMany);
+				seq.addIncreasingIntegers(howMany);
+				seq.localizedShuffle(seed, 100);
+				nanos += benchInsertSort(seq, 10);
+			}
+			System.out.printf(",%d", nanos / 10);
 		}
 
-		System.out.printf("\ninsertSort,reversed integers");
+		System.out.printf("\nmergeSort,fully shuffled");
 		for (int howMany : dataSizes) {
-			IntegerSequence seq = new IntegerSequence(howMany);
-			seq.addDecreasingIntegers(howMany);
-			long nanos = benchInsertSort(seq, 100);
-			System.out.printf(",%d", nanos);
+			long nanos = 0;
+			for (int seed = 0; seed < 10; seed++) { // try different (but predictable) seeds
+				IntegerSequence seq = new IntegerSequence(howMany);
+				seq.addIncreasingIntegers(howMany);
+				seq.shuffle(seed);
+				nanos += benchMergeSort(seq, 10);
+			}
+			System.out.printf(",%d", nanos / 10);
 		}
-
+		
 		System.out.printf("\ninsertSort,fully shuffled");
 		for (int howMany : dataSizes) {
 			long nanos = 0;
@@ -77,17 +73,22 @@ public class SortingAlgorithmComparison {
 			System.out.printf(",%d", nanos / 10);
 		}
 
-		System.out.printf("\ninsertSort,partly shuffled");
+		System.out.printf("\nmergeSort,reversed integers");
 		for (int howMany : dataSizes) {
-			long nanos = 0;
-			for (int seed = 0; seed < 10; seed++) {
-				IntegerSequence seq = new IntegerSequence(howMany);
-				seq.addIncreasingIntegers(howMany);
-				seq.localizedShuffle(seed, 100);
-				nanos += benchInsertSort(seq, 10);
-			}
-			System.out.printf(",%d", nanos / 10);
+			IntegerSequence seq = new IntegerSequence(howMany);
+			seq.addDecreasingIntegers(howMany);
+			long nanos = benchMergeSort(seq, 100);
+			System.out.printf(",%d", nanos);
 		}
+
+		System.out.printf("\ninsertSort,reversed integers");
+		for (int howMany : dataSizes) {
+			IntegerSequence seq = new IntegerSequence(howMany);
+			seq.addDecreasingIntegers(howMany);
+			long nanos = benchInsertSort(seq, 100);
+			System.out.printf(",%d", nanos);
+		}
+
 	}
 
 	public static long benchMergeSort(IntegerSequence original, int runs) {
